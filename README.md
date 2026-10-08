@@ -42,7 +42,7 @@ have an LLM review it, and commit the feedback.
   - [x] [Study Note](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A1%20%E2%80%94%20Background%20Study%20Notes/studyNote.md) — five-minute presentation, how to read a paper, and your project proposal
   - [x] [Slides](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A1%20%E2%80%94%20Background%20Study%20Notes/slides.pptx)
   - [x] Rehearsal Presentation: [Recording](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A1%20%E2%80%94%20Background%20Study%20Notes/presentationLink.md), [Speaker Coach feedback](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A1%20%E2%80%94%20Background%20Study%20Notes/speakerCoach.png), and [LLM feedback](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A1%20%E2%80%94%20Background%20Study%20Notes/LLMFeedback.md)
-  - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
+  - [x] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### A2 — ns-3 Setup & First Scenario
 
