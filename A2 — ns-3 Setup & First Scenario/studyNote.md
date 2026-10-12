@@ -44,7 +44,7 @@ For the analysis, Claude generated a python file to create the graphs.
 
 For the python code to run, it needed a few libraries: namely numpy, pandas, and matplotlib. For their install, I used ```pip``` but it complained about an "externally managed environment". 
 
-photo  
+<img width="1582" height="979" alt="Capture d’écran 2026-10-08 à 15 34 07" src="https://github.com/user-attachments/assets/f0613cca-9437-4a38-91c4-caa2e1913f46" />
 
 I tried to solve the issue using ```pipx``` but this wasn't fixing the issue because it isolates the libraries. 
 
@@ -56,7 +56,8 @@ Packet size (bytes): n=4720, mean=50.068, min=20.000, max=250.000
 Inter-arrival time (ms): n=4130, mean=4.754, min=2.501, max=12.497
 ```
 
-photo matplotlib
+<img width="1100" height="800" alt="Figure_1" src="https://github.com/user-attachments/assets/70885cff-a150-4cd2-a697-7bfe3565d990" />
+
 
 ## Analysis
 
