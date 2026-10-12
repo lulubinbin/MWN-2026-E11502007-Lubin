@@ -29,7 +29,7 @@ Using Claude, I generated a 3GPP traffic model:
 
 ## Running the model
 
-I ran it with ns-3 and it failed at first but after renaming two variables the code produced a ```.csv``` and two ```.pcap``` files.  
+I ran it with ns-3 and it failed at first but after renaming two variables the code produced a `.csv` and two `.pcap` files.  
 
 Here is what it returned in the terminal after running:
 ```
@@ -40,13 +40,18 @@ Flow 1
   Mean delay : 10.1281 ms
 ```
 
+Here is a screenshot of `a2-video-1-0.pcap`: 
+
+<img width="1254" height="978" alt="Capture d’écran 2026-10-12 à 23 08 16" src="https://github.com/user-attachments/assets/96277d16-1236-4164-9014-6049b8dd27f8" />
+
+
 For the analysis, Claude generated a python file to create the graphs. 
 
-For the python code to run, it needed a few libraries: namely numpy, pandas, and matplotlib. For their install, I used ```pip``` but it complained about an "externally managed environment". 
+For the python code to run, it needed a few libraries: namely numpy, pandas, and matplotlib. For their install, I used `pip` but it complained about an "externally managed environment". 
 
 <img width="1582" height="979" alt="Capture d’écran 2026-10-08 à 15 34 07" src="https://github.com/user-attachments/assets/f0613cca-9437-4a38-91c4-caa2e1913f46" />
 
-I tried to solve the issue using ```pipx``` but this wasn't fixing the issue because it isolates the libraries. 
+I tried to solve the issue using `pipx` but this wasn't fixing the issue because it isolates the libraries. 
 
 In the end, I created a virtual environment which solved the issue. 
 
