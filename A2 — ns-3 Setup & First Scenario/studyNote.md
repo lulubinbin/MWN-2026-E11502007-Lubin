@@ -61,3 +61,10 @@ Inter-arrival time (ms): n=4130, mean=4.754, min=2.501, max=12.497
 
 ## Analysis
 
+**Run results**: All 4,720 packets sent were received, so there was no loss, as expected on an almost idle 5 Mbps link. The mean delay of 10.13 ms is the 10 ms link propagation delay plus about 0.13 ms transmission time, with no measurable queuing.
+
+**Packet size**: The simulated mean is 50.1 B, with a minimum of 20 B and a maximum of 250 B, which are exactly the truncation bounds. The PDF peaks at the minimum and has a long right tail, which is the heavy-tailed Pareto shape. The simulated CDF overlaps the theoretical curve, so the generator draws from the intended distribution.
+
+**Inter-arrival time**: The simulated mean is 4.75 ms, within the 2.5 to 12.5 ms bounds. Only the gaps inside a frame are included. The number of samples is n = 4,130, which is 590 frames × 7 gaps, because the first packet of each frame has no gap. The PDF and CDF again match the theory.
+
+**Conclusion**: The ns-3 build works, and the generator reproduces the intended traffic model. The means are lower than the untruncated Pareto means because the tail is cut off at the maximum. 
