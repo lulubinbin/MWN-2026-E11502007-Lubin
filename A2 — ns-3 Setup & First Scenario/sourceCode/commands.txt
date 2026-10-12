@@ -1,0 +1,13 @@
+To run, the "a2-3gpp-video.cc" file must be in the scratch folder of ns-3. 
+In a terminal that is in the ns-3 directory: 
+> ./ns3 run scratch/a2-3gpp-video
+Make sure CMake is installed
+
+"plot_dist.py" must be in the ns-3 directory. 
+
+To create the virtual environment: 
+> python3 -m venv .venv && source .venv/bin/activate
+> pip install numpy pandas matplotlib
+
+Then run the file
+> python3 plot_dist.py
