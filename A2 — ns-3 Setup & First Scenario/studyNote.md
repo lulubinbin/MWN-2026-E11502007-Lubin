@@ -10,7 +10,7 @@
 
 For this install I first intalled the latest version using **homebrew** on my mac. The version was **3.49**. However, since on the [ns-3 website](https://www.nsnam.org/releases/) the latest version was **3.48**, I deleted everything and started again with the package I downloaded from the website. 
 
-> The version I am using now is 3.48 all in one. 
+> The version I am using now is **3.48 all in one** running on **MacOS 15.8.1**
 
 ### Build and tests
 
