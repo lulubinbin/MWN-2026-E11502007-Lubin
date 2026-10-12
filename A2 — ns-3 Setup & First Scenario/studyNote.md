@@ -40,7 +40,7 @@ Flow 1
   Mean delay : 10.1281 ms
 ```
 
-Here is a screenshot of `a2-video-1-0.pcap`: 
+Here is a screenshot of `a2-video-1-0.pcap` (the receiver): 
 
 <img width="1254" height="978" alt="Capture d’écran 2026-10-12 à 23 08 16" src="https://github.com/user-attachments/assets/96277d16-1236-4164-9014-6049b8dd27f8" />
 
