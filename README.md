@@ -52,7 +52,7 @@ have an LLM review it, and commit the feedback.
   - [x] [Source code + run command](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/tree/main/A2%20%E2%80%94%20ns-3%20Setup%20%26%20First%20Scenario/sourceCode) for your simple scenario
   - [x] [Result from your own run](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A2%20%E2%80%94%20ns-3%20Setup%20%26%20First%20Scenario/studyNote.md#running-the-model) — numbers, trace, or a Wireshark capture
   - [x] [Rehearsal Presentation](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/tree/main/A2%20%E2%80%94%20ns-3%20Setup%20%26%20First%20Scenario/presentation%20report)
-  - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
+  - [x] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### A3 — Literature Review
 
