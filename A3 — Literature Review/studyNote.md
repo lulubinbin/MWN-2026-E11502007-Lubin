@@ -1,1 +1,18 @@
+# A3 — Literature Review
 
+> [!NOTE]
+> **Lubin OUISSE**  
+> E11502007
+
+## ANALYSIS OF IEEE 802.11E FOR QOS SUPPORT IN WIRELESS LANS
+
+> STEFAN MANGOLD, PHILIPS RESEARCH  
+> SUNGHYUN CHOI, SEOUL NATIONAL UNIVERSITY  
+> GUIDO R. HIERTZ, OLE KLEIN, AND BERNHARD W ALKE, AACHEN UNIVERSITY
+
+### Problem
+### Importance
+### Challenges
+### System Model
+### Experimental Results
+### A1 Takeways
