@@ -99,3 +99,26 @@ Several open problems remain. As the number of contending stations grows, **coll
 - Overlapping QBSSs: even the highest-priority HCCA stream exceeds its delay bound, because the two HCs share the medium without coordination. Worst case: if both HCs poll at the same time, all poll frames collide and HCCA throughput drops to zero.
 - Conclusion: HCCA provides time-bounded delivery only when all QBSSs in radio range follow its coordination; the overlapping-QBSS problem remained open (candidate solutions: dynamic frequency selection, coordination policies).
 
+---
+### ns-3 settings
+
+| Setting | ns-3.48 value | Why |
+| --- | --- | --- |
+| Standard | `WIFI_STANDARD_802.11a` | Paper uses 802.11a PHY, 5 GHz |
+| Channel | `YansWifiChannelHelper::Default()` (LogDistance loss + constant speed propagation) | Standard indoor-ish channel; baseline keeps all stations close so losses are negligible, as in the paper |
+| PHY helper | `YansWifiPhyHelper` attached to the channel | Default ns-3.48 approach |
+| Data rate | `ConstantRateWifiManager` with `DataMode = OfdmRate24Mbps` | Paper: all frames at 24 Mb/s, no rate adaptation |
+| Control rate | `ControlMode = OfdmRate24Mbps` | Paper Figs. 8–9 use 24 Mb/s for everything, including ACKs (the 6 Mb/s control rate is only used in the HCCA study) |
+| RTS/CTS | Disabled (default: `RtsCtsThreshold = 65535`) | Paper disables RTS/CTS |
+| Fragmentation | Disabled (default: `FragmentationThreshold = 2346`, larger than MSDU) | Paper disables fragmentation |
+| MSDU size | Application packet size = 512 bytes | Paper's MSDU size |
+| Aggregation | None (default for 802.11a) | Paper sends one frame per TXOP |
+| EDCA-TXOP limit | 0 (default) | TXOP limit 0 = one frame exchange per TXOP, matching the paper |
+
+## A1 project proposal revision
+
+In A1, I proposed studying the effect of distance on QoS as the final modification. After reading the paper, I refined this to far stations and rate adaptation versus EDCA QoS.
+
+The original idea was too vague and would only show that throughput falls with distance, which is true of any wireless link. The paper also never tests distance. It fixes the data rate at 24 Mb/s and places all stations so none are hidden, so its conclusions about EDCA hold only under uniform conditions.
+
+The refinement targets a specific mechanism. Far stations must use slower PHY rates, so their frames occupy the channel longer. The testable hypothesis is that far stations consume disproportionate airtime and degrade voice and video throughput, delay and loss for all stations despite prioritization. This can be compared directly against the fixed-rate baseline from the Figure 9 reproduction.
