@@ -59,7 +59,7 @@ have an LLM review it, and commit the feedback.
 - [Assignment Information](https://github.com/bmw-ece-ntust/multimedia-wireless-network?tab=readme-ov-file#a3--literature-review)
 - Submissions:
   - [x] [Study Note](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A3%20%E2%80%94%20Literature%20Review/studyNote.md) — per paper: problem / importance / challenges, system model (environment, I/Ps, O/Ps, metrics), experimental settings for ns-3
-  - [x] Rehearsal Presentation: [Recording](https://drive.google.com/drive/folders/1UEizD8VzQ8R4Dr1zPnucRUpc7b-yBIus?usp=sharing), [Feedback](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/tree/main/A3%20%E2%80%94%20Literature%20Review/LLM%20Feedback)
+  - [x] Rehearsal Presentation: [Recording](https://drive.google.com/drive/folders/1UEizD8VzQ8R4Dr1zPnucRUpc7b-yBIus?usp=sharing), [Feedback](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A3%20%E2%80%94%20Literature%20Review/LLM%20feedback.png)
   - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### A4 — Baseline Reproduction
