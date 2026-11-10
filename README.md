@@ -60,7 +60,7 @@ have an LLM review it, and commit the feedback.
 - Submissions:
   - [ ] [Study Note](path to your .md file) — per paper: problem / importance / challenges, system model (environment, I/Ps, O/Ps, metrics), experimental settings for ns-3
   - [ ] [Revised project proposal](path to specific section in your study note) — what changed from A1 and why
-  - [ ] [Rehearsal Presentation](path to recording + LLM feedback)
+  - [ ] Rehearsal Presentation: [Recording](https://drive.google.com/drive/folders/17z4pKxuTAZn3ZYxtzpIlTH732AY8KF3p?usp=sharing), [Feedback]()
   - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### A4 — Baseline Reproduction
