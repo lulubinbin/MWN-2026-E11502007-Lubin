@@ -20,5 +20,9 @@ With 802.11 being deployed rapidly in homes, enterprises, and public hotspots, t
 Several open problems remain. As the number of contending stations grows, **collision probabilities** rise sharply — especially in the high-priority voice category, whose small contention windows degrade throughput dramatically unless the coordinator retunes parameters. More critically, in overlapping QBSSs (neighboring networks sharing the same medium), hybrid coordinators **cannot coordinate** with each other, so even the highest-priority polled traffic suffers unpredictable delay and throughput loss. Proposed remedies such as dynamic frequency selection and policy-based coordination were still under discussion in the working group.
 
 ### System Model
-### Experimental Results
-### A1 Takeways
+#### Environment
+- An infrastructure QBSS (one AP, which hosts the hybrid coordinator HC, plus associated stations) on an 802.11a PHY at 5 GHz, up to 54 Mb/s.  
+- All stations are placed so that nobody is hidden to anybody.  
+- A radio error model from the authors' earlier work is used.  
+- The paper studies two MAC schemes: EDCA (contention-based, in the CP) and HCCA (HC-controlled polling, in CP and CFP).  
+
