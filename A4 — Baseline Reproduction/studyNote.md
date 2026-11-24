@@ -30,6 +30,12 @@
 
 ### Results Comparison
 
+#### My findings
+<img width="750" height="550" alt="Figure_9" src="https://github.com/user-attachments/assets/a3f87464-59e2-40b3-9bc7-100658f2ba9f" />
+
+#### The baseline
+<img width="540" height="614" alt="Capture d’écran 2026-11-24 à 23 28 20" src="https://github.com/user-attachments/assets/43d7db9f-b5b3-4102-a435-a29dbe4a42db" />
+
 | Metric / Access Category | Original Paper | `ns-3.48` Reproduction |
 | :--- | :--- | :--- |
 | **Peak `AC_VO` (Voice)** | ~4.7 Mb/s (`N = 5`) → 0.4 Mb/s (`N = 16`) | ~2.9 Mb/s (`N = 14`) → 2.8 Mb/s (`N = 16`) |
@@ -65,6 +71,13 @@ Figure 8 validates that the `ns-3.48` EDCA configuration correctly enforces prio
 | **Duration & RNG** | 10 s sim (1 s warmup, 9 s measured), `RngSeed = 1`, `RngRun = 1`, 1 run per point |
 
 ### Results Comparison (Saturation ≥ 15 Mb/s)
+
+#### My findings
+<img width="750" height="550" alt="Figure_8" src="https://github.com/user-attachments/assets/3bf08e92-841f-4d15-9cc6-9ec9f5de5493" />
+
+#### The baseline
+<img width="544" height="600" alt="Capture d’écran 2026-11-24 à 23 29 23" src="https://github.com/user-attachments/assets/4357e90e-087b-4dbc-89fc-430ccf5eb81e" />
+
 
 | Access Category | Original Paper | `ns-3.48` Reproduction |
 | :--- | :--- | :--- |
