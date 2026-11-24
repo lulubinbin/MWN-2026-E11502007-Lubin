@@ -67,9 +67,9 @@ have an LLM review it, and commit the feedback.
 - [Assignment Information](https://github.com/bmw-ece-ntust/multimedia-wireless-network?tab=readme-ov-file#a4--baseline-reproduction)
 - Submissions:
   - [x] [Study Note](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A4%20%E2%80%94%20Baseline%20Reproduction/studyNote.md)
-  - [ ] [Flowchart + source code for simulation and analysis](path to your src/)
-  - [ ] [Numerical results](path to specific section in your study note) — plotted against the paper's figure, with parameters, seeds and run count
-  - [ ] [Rehearsal Presentation](path to recording + LLM feedback)
+  - [x] [Source code for simulation and analysis](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/tree/main/A4%20%E2%80%94%20Baseline%20Reproduction/sourceCode)
+  - [x] [Numerical results](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A4%20%E2%80%94%20Baseline%20Reproduction/studyNote.md)
+  - [ ] Rehearsal Presentation: [Recording](), [LLM feedback]()
   - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### Final Project — Your Modification
