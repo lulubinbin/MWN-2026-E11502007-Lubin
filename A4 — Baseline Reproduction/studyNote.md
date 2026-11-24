@@ -1,58 +1,83 @@
 # A4 — Baseline Reproduction
 
 > [!NOTE]
-> **Lubin OUISSE**  
+> **Lubin OUISSE**
 > E11502007
 
 ## Final project revision from A3
 
+**Problem Identified (Figure 9):** Under multi-station contention (`N` → 16), the default IEEE 802.11e EDCA parameter set (Table 1) causes severe throughput degradation—particularly for `AC_VO` (`CWmin = 3`, `CWmax = 7`), whose small contention window leads to frequent collisions as the number of contending stations grows.
+
+**Proposed Modification:** Following the authors' recommendation that the Hybrid Coordinator (HC) adapt EDCA parameters to network load, I will modify the EDCA parameter policy (scaling `CWmin` / `CWmax` and/or `AIFSN` with station count `N`) and evaluate it against our A4 baseline in `ns-3.48` on per-AC throughput, aggregate throughput, and packet loss, while verifying on Figure 8 that strict priority differentiation is preserved.
+
 ---
+
 > I will reproduce here the results from **Analysis of IEEE 802.11e for QoS Support in Wireless LANs** by *Stefan Mangold*, *Sunghyun Choi*, *Guido R. Hiertz*, *Ole Klein*, and *Bernhard Walke*.
 
-## Figure 9 - EDCA throughput vs. number of stations - [EXPERIMENT 2]
-### A3 Reminder
-#### Inputs
+## Figure 9 — EDCA Throughput vs. Number of Stations
 
-| Item | Setting |
-| --- | --- |
-| Topology | N contending stations (N = 1…16) around the AP, every station transmits |
-| Traffic | Same model: 512-byte MSDUs, exponential inter-arrivals. 4 streams per station (one per AC) at 250 kb/s each = 1 Mb/s per station |
-| EDCA parameters | Same Table 1 defaults as Experiment 1 |
-| PHY/MAC rates | All frames at 24 Mb/s |
-| Other MAC settings | One data frame per EDCA-TXOP, no RTS/CTS, no fragmentation; no beacons |
+### Simulation Setup & Reproducibility Parameters
 
-#### Outputs
+| Parameter | Setting |
+| :--- | :--- |
+| **Simulator & Script** | `ns-3.48` (`scratch/fig9-edca-throughput.cc`) |
+| **Topology** | 1 AP at `(0, 0, 0)` m, `N` STAs on a 5 m circle (no hidden nodes) |
+| **PHY / MAC** | IEEE 802.11a (5 GHz), `ConstantRateWifiManager` (`OfdmRate24Mbps`), RTS/CTS disabled, `TxopLimit = 0 µs` |
+| **EDCA (Table 1)** | `AC_VO` (`0xc0`): 2/3/7 · `AC_VI` (`0x80`): 2/7/15 · `AC_BE` (`0x00`): 3/15/1023 · `AC_BK` (`0x20`): 7/15/1023 (`AIFSN`/`CWmin`/`CWmax`) |
+| **Traffic Model** | `4N` UDP uplink flows (4 per STA, 1 per AC), 250 kb/s per stream (1 Mb/s per STA), 512-byte payload, `OnOffApplication` (`OnTime ~ Exp(0.05 s)`, `OffTime = 0 s`) |
+| **Station Sweep** | `N` ∈ `{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 16}` stations |
+| **Duration & RNG** | 10 s sim (1 s warmup, 9 s measured), `RngSeed = 1`, `RngRun = 1`, 1 run per point |
 
-- Throughput per AC (Mb/s) as a function of the number of stations.
+### Results Comparison
 
-#### Results
+| Metric / Access Category | Original Paper | `ns-3.48` Reproduction |
+| :--- | :--- | :--- |
+| **Peak `AC_VO` (Voice)** | ~4.7 Mb/s (`N = 5`) → 0.4 Mb/s (`N = 16`) | ~2.9 Mb/s (`N = 14`) → 2.8 Mb/s (`N = 16`) |
+| **Peak `AC_VI` (Video)** | ~3.9 Mb/s (`N = 4`) → 0.1 Mb/s (`N = 16`) | ~3.3 Mb/s (`N = 14`) → 3.2 Mb/s (`N = 16`) |
+| **Peak `AC_BE` (Best Effort)** | ~3.3 Mb/s (`N = 4`) → 0.0 Mb/s (`N = 16`) | ~2.9 Mb/s (`N = 11`) → 0.3 Mb/s (`N = 16`) |
+| **Peak `AC_BK` (Background)** | ~2.8 Mb/s (`N = 3`) → 0.0 Mb/s (`N = 16`) | ~2.3 Mb/s (`N = 9`) → 0.0 Mb/s (`N = 16`) |
 
-- Per-AC throughput peaks around N = 4: AC_VO ≈ 4, AC_VI ≈ 3, AC_BE ≈ 2, AC_BK ≈ 1 Mb/s.
-- After that, throughput collapses toward zero at N = 16, because collision probability grows with the number of contending backoff entities.
-- The collapse is worst for AC_VO: its tiny CWmin = 3 / CWmax = 7 gives little protection against collisions at high contention.
-- Authors' interpretation: with default parameters, EDCA does not scale to hotspots; the HC should dynamically re-set the EDCA parameters, and real voice load per station would be far lower than the 250 kb/s tested here.
+### Explanation of Differences
 
-## Figure 8 - EDCA throughput vs. offered load - [EXPERIMENT 1]
-### A3 Reminder
-#### Inputs
+While all four ACs match offered load at low contention (`N` ≤ 8) and lower-priority traffic (`AC_BK`, `AC_BE`) drops off as contention increases, overall throughput is lower and saturates later than in Mangold et al. (Figure 9) due to:
 
-| Item | Setting |
-| --- | --- |
-| Topology | 1 AP + 3 stations, AP sends 12 downstream streams (one per AC to each station) |
-| Traffic | 512-byte MSDUs, negative-exponential inter-arrivals, 250 kb/s per stream |
-| Offered load | Swept per AC from 0 to 30 Mb/s |
-| EDCA parameters | Table 1 defaults (draft 802.11e/D5.0): AC_VO 2/3/7, AC_VI 2/7/15, AC_BE 3/15/1023, AC_BK 7/15/1023 (AIFSN/CWmin/CWmax) |
-| PHY/MAC rates | All frames (data, control) at 24 Mb/s |
-| Other MAC settings | One data frame per EDCA-TXOP, no RTS/CTS, no fragmentation, no beacons |
+1. **Offered Load Scaling:** The script follows the paper's text (`250 kb/s` per stream = `0.25 * N` Mb/s per AC, reaching `4.0 Mb/s` at `N = 16`), whereas the dashed offer line plotted in Figure 9 of the paper rises faster (`~4 Mb/s` at `N = 4` and `~9 Mb/s` at `N = 10`), shifting saturation later.
+2. **MAC Version & Framing:** `ns-3.48` implements ratified 802.11 EDCA with full headers and periodic beacons, whereas the paper used pre-standard `802.11e/D5.0` without beacons and a custom 5 GHz error model.
+3. **Traffic Arrivals & Contention:** `OnOffApplication` (`OffTime = 0 s`) paces packets rather than pure single-packet exponential inter-arrivals, and at high station counts (`N = 10 ... 16`) `AC_VO`'s small contention window (`3/7`) suffers frequent collisions alongside `AC_VI` (`7/15`).
+4. **Sample Size:** I ran 1 seed (`RngRun = 1`) over 9 s per point rather than multi-run LRE stopping (< 5% relative error).
 
-#### Outputs
-
-- Throughput per AC (Mb/s) as a function of offered traffic per AC.
-
-#### Results
-
-- At low load, every AC carries its offered traffic.
-- At saturation, strict priority ordering emerges: AC_VO ≈ 12 Mb/s, AC_VI ≈ 6 Mb/s, AC_BE ≈ 4 Mb/s, AC_BK ≈ 1 Mb/s.
-- Higher-priority ACs (smaller AIFSN, CWmin, CWmax) starve the lower ones; the total channel capacity is shared according to the EDCA parameter ratios.
+## Figure 8 — EDCA Throughput vs. Offered Load (Baseline)
 
 ### Why Figure 8
+
+Figure 8 validates that the `ns-3.48` EDCA configuration correctly enforces priority differentiation (`AC_VO` > `AC_VI` > `AC_BE` > `AC_BK`) when there is no multi-station contention. For the final project where I modify the EDCA parameter set to prevent the collision-induced throughput collapse seen in Figure 9, Figure 8 serves as a sanity check to ensure that tuning `CWmin`, `CWmax`, or `AIFSN` preserves strict QoS prioritization under varying offered loads.
+
+### Simulation Setup & Reproducibility Parameters
+
+| Parameter | Setting |
+| :--- | :--- |
+| **Simulator & Script** | `ns-3.48` (`scratch/fig8-edca-throughput.cc`) |
+| **Topology** | 1 AP at `(0, 0, 0)` m, 3 STAs at 5 m radius (no hidden nodes) |
+| **PHY / MAC** | IEEE 802.11a (5 GHz), `ConstantRateWifiManager` (`OfdmRate24Mbps`), RTS/CTS disabled, `TxopLimit = 0 µs` |
+| **EDCA (Table 1)** | `AC_VO` (`0xc0`): 2/3/7 · `AC_VI` (`0x80`): 2/7/15 · `AC_BE` (`0x00`): 3/15/1023 · `AC_BK` (`0x20`): 7/15/1023 (`AIFSN`/`CWmin`/`CWmax`) |
+| **Traffic Model** | 12 UDP downlink flows (3 per AC), 512-byte payload, `OnOffApplication` (`OnTime ~ Exp(0.05 s)`, `OffTime = 0 s`) |
+| **Offered Load Sweep** | `{0, 1.5, 3, 4.5, 6, 7.5, 9, 12, 15, 18, 24, 30}` Mb/s per AC |
+| **Duration & RNG** | 10 s sim (1 s warmup, 9 s measured), `RngSeed = 1`, `RngRun = 1`, 1 run per point |
+
+### Results Comparison (Saturation ≥ 15 Mb/s)
+
+| Access Category | Original Paper | `ns-3.48` Reproduction |
+| :--- | :--- | :--- |
+| **`AC_VO` (Voice)** | ~12.8 Mb/s | ~11.2 Mb/s |
+| **`AC_VI` (Video)** | ~1.3 Mb/s | ~2.8 Mb/s |
+| **`AC_BE` (Best Effort)** | ~0.0 Mb/s | ~0.1 Mb/s |
+| **`AC_BK` (Background)** | ~0.0 Mb/s | ~0.0 Mb/s |
+| **Aggregate Total** | ~14.1 Mb/s | ~14.1 Mb/s |
+
+### Explanation of Differences
+
+While total channel capacity (~14.1 Mb/s) and the priority starvation order (`AC_BK` → `AC_BE` → `AC_VI` → `AC_VO`) match, `AC_VO` is ~1.6 Mb/s lower and `AC_VI` is ~1.5 Mb/s higher at saturation due to:
+
+1. **MAC Version & Framing:** `ns-3.48` implements ratified 802.11 EDCA with full QoS/LLC/IP/UDP headers and periodic beacons, whereas the paper used pre-standard `802.11e/D5.0` without beacons.
+2. **Traffic Arrivals:** `OnOffApplication` generates active bursts rather than pure single-packet Poisson MSDU arrivals, slightly smoothing the low-load drop-off.
+3. **Sample Size:** I ran 1 seed (`RngRun = 1`) over 9 s per point rather than multi-seed LRE stopping (< 5% relative error).
