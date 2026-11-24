@@ -69,7 +69,7 @@ have an LLM review it, and commit the feedback.
   - [x] [Study Note](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A4%20%E2%80%94%20Baseline%20Reproduction/studyNote.md)
   - [x] [Source code for simulation and analysis](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/tree/main/A4%20%E2%80%94%20Baseline%20Reproduction/sourceCode)
   - [x] [Numerical results](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A4%20%E2%80%94%20Baseline%20Reproduction/studyNote.md)
-  - [x] Rehearsal Presentation: [Recording](https://drive.google.com/drive/folders/1UvywIr296gh8ArAS3UF_wvArCKOd-MTD?usp=sharing), [LLM feedback]()
+  - [x] Rehearsal Presentation: [Recording](https://drive.google.com/drive/folders/1UvywIr296gh8ArAS3UF_wvArCKOd-MTD?usp=sharing), [LLM feedback](https://github.com/lulubinbin/MWN-2026-E11502007-Lubin/blob/main/A4%20%E2%80%94%20Baseline%20Reproduction/presentationFeedback.png)
   - [ ] [Peer Review](https://forms.gle/eGE2JJgjXpCXwqfq7)
 
 ### Final Project — Your Modification
